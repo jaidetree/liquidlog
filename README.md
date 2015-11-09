@@ -11,12 +11,6 @@ npm install --save-dev gutil-waterlog
 ## Usage
 
 ```js
-var gulp = require('gulp'),
-    tap = require('gulp-tap'),
-    log = require('gutil-waterlog'),
-    // For example in a babel build task
-    babel = require('babel');
-
 gulp.task('example', function () {
   log.time('task');
   log.task('example') // 'example is the plugin\group name'
@@ -48,9 +42,11 @@ gulp.task('example', function () {
         .send();
     }))
     .on('end', function () {
+      // Lets say I wanted some text centered with some lines next to it
       let total = process.stdout.columns - 13,
-          half = Math.ceil(total / 2),
-          offset = Math.ceil(' WHEW '.length / 2);
+          half = Math.floor(total / 2),
+          offset = Math.floor(' WHEW '.length / 2),
+          right = 0;
 
       log.text().hr().send();
       log.task('example')
@@ -59,16 +55,20 @@ gulp.task('example', function () {
         .hr()
         .send();
 
+      if (half * 2 < total) {
+        right = 1;
+      }
+
       log.text()
-        .hr('=', half - offset).text(' WHEW ').hr('=', half - offset, '', '\n')
+        .hr('=', half - offset).text(' WHEW ').hr('=', half - offset + right, '', '\n')
         .text('This is getting very excessive now!')
         .line('But you can do a lot')
         .line()
         .text('Like a whole lot')
         .hr()
         .send();
-
     });
+});
 ```
 
 ![Image of library output][screenshot-image]
