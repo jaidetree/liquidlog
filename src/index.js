@@ -4,6 +4,7 @@ import ActionMessage from './actionmessage';
 import StartMessage from './startmessage';
 import ErrorMessage from './errormessage';
 import SuccessMessage from './successmessage';
+import Timers from './timers';
 
 let gutil = require('gulp-util'),
     colors = gutil.colors;
@@ -35,6 +36,16 @@ let gutil = require('gulp-util'),
  * @class
  */
 export class Logger {
+  /**
+   * Constructor
+   * Initializes our Logger class and creates the timers subinstance
+   *
+   * @constructor
+   */
+  constructor() {
+    this.timers = new Timers();
+  }
+
   /**
    * Build Message
    * Creates an instance of the message type. If we are given a bunch of
@@ -152,6 +163,32 @@ export class Logger {
    */
   text(...args) {
     return this.buildMessage(TaskMessage, null, ...args);
+  }
+
+  /**
+   * Time
+   * Start a timer with the given name index
+   *
+   * @method
+   * @public
+   * @param {string} name - Name of the timer to create
+   * @returns {int} milliseconds since the unix epoch
+   */
+  time(name) {
+    return this.timers.start(name);
+  }
+
+  /**
+   * Time End
+   * Stops a timer with the given name index
+   *
+   * @method
+   * @public
+   * @param {string} name - Name of the timer to stop
+   * @returns {string} Elapsed time formatted as a strng with a unit
+   */
+  timeEnd(name) {
+    return this.timers.stop(name);
   }
 }
 

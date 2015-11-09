@@ -80,7 +80,7 @@ describe('Logger', () => {
       message = logger.start('test', 'Testing logger library');
       output = ceptor.release();
 
-      assert.equal(clean(output), '• [TEST]: Testing logger library …');
+      assert.equal(clean(output), '» [TEST]: Testing logger library …');
     });
 
     it('should support colored formatting', () => {
@@ -99,7 +99,7 @@ describe('Logger', () => {
 
       output = ceptor.getOutput();
 
-      assert.equal(clean(output), '\u001b[90m•\u001b[39m \u001b[37m[\u001b[39m\u001b[36mTEST\u001b[39m\u001b[37m]:\u001b[39m Tested \u001b[35mthis\u001b[39m …');
+      assert.equal(clean(output), '\u001b[32m\u001b[1m»\u001b[22m\u001b[39m \u001b[37m[\u001b[39m\u001b[36mTEST\u001b[39m\u001b[37m]:\u001b[39m Tested \u001b[35mthis\u001b[39m …');
     });
   });
 

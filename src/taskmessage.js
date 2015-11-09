@@ -70,9 +70,22 @@ export default class TaskMessage {
    * @public
    * @param {string} [char="-" - The character to use to render the rule
    * @param {int} [width=MAX_COLUMNS] - Maximum number of columns in terminal
+   * @param {string} [prefix='\n'] - Prefix before the newline
+   * @param {string} [suffix=''] - Sufix at the end of the line
    */
-  hr(char='-', width=process.stdout.columns - 11) {
-    this.message.push(char.repeat(width));
+  hr(char='-', width=process.stdout.columns, prefix='\n', suffix='') {
+    var isEmpty = this.message.length === 0;
+
+    /** If the message is otherwise empty then account for timestamp */
+    if (isEmpty && width === process.stdout.columns) {
+      width -= 11;
+    }
+
+    /** If the message is empty and the prefix is default remove it */
+    if (isEmpty && prefix === '\n') {
+      prefix = '';
+    }
+    this.message.push(prefix, char.repeat(width), suffix);
     return this;
   }
 

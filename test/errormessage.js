@@ -79,7 +79,7 @@ describe('ErrorMessage', () => {
     it('should support the text param', () => {
       let message = new ErrorMessage();
       message.text('Hi').line('world');
-      assert.equal(message.toString(), '\u001b[31m\u001b[1mHi\u001b[22m\u001b[39m \n \u001b[31m\u001b[1mworld\u001b[22m\u001b[39m');
+      assert.equal(message.toString(), '\u001b[31m\u001b[1mHi\u001b[22m\u001b[39m \n\u001b[31m\u001b[1mworld\u001b[22m\u001b[39m');
     });
   });
 

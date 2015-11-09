@@ -16,7 +16,7 @@ describe('StartMessage', () => {
     });
 
     it('should have methods', () => {
-      let methods = Object.getOwnPropertyNames(StartMessage.prototype.__proto__.__proto__);
+      let methods = Object.getOwnPropertyNames(StartMessage.prototype.__proto__);
       assert.deepEqual(methods, ['constructor', 'action', 'data', 'hr', 'line', 'send', 'text', 'time', 'toString']);
     });
   });
@@ -79,7 +79,7 @@ describe('StartMessage', () => {
     it('should support the text param', () => {
       let message = new StartMessage();
       message.text('Hi').line('world');
-      assert.equal(message.toString(), 'Hi \n world');
+      assert.equal(message.toString(), 'Hi \nworld');
     });
   });
 
@@ -93,7 +93,7 @@ describe('StartMessage', () => {
       ceptor.capture();
       message.send();
       output = ceptor.release();
-      assert.equal(output.slice(output.indexOf(' ') + 1), '• Hi there friend …');
+      assert.equal(output.slice(output.indexOf(' ') + 1), '» Hi there friend …');
     });
   });
 

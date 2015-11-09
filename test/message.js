@@ -47,6 +47,15 @@ describe('Message', () => {
     });
   });
 
+  describe('#last()', () => {
+    it('should return the last item', () => {
+      let parts = ['one', 'two', 'three'],
+          message = new Message(parts);
+
+      assert.equal(message.last(), 'three');
+    });
+  });
+
   describe('#pop()', () => {
     it('should remove the last message part', () => {
       let parts = ['one', 'two', 'three'],

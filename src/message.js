@@ -40,6 +40,18 @@ export default class Message {
   }
 
   /**
+   * Last
+   * Returns the last message part
+   *
+   * @method
+   * @public
+   * @returns {string} Last message part
+   */
+  last() {
+    return this.message[this.message.length - 1];
+  }
+
+  /**
    * Pop
    * Removes the last message part
    *
@@ -74,7 +86,7 @@ export default class Message {
    * @public
    */
   send() {
-    return gutil.log(...this.message);
+    return gutil.log(this.toString());
   }
 
   /**
@@ -98,7 +110,7 @@ export default class Message {
    * @returns {string} String format of the message separated into words.
    */
   toString() {
-    return this.message.join(' ');
+    return this.message.join(' ').replace(/\n /g, '\n');
   }
 
   /**

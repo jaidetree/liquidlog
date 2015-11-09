@@ -1,4 +1,4 @@
-import ActionMessage from './actionmessage';
+import TaskMessage from './taskmessage';
 import {colors} from 'gulp-util';
 
 /**
@@ -12,11 +12,12 @@ import {colors} from 'gulp-util';
  * @property {string} plugin - Name of plugin log statement was called from
  * @property {string} icon - icon string to prepend when sending
  */
-export default class StartMessage extends ActionMessage {
+export default class StartMessage extends TaskMessage {
   constructor(plugin) {
     // Call the ActionMessage constructor
     super(plugin);
     this.type = 'start';
+    this.icon = colors.green.bold('»');
   }
 
   /**
@@ -27,7 +28,11 @@ export default class StartMessage extends ActionMessage {
    * @public
    */
   send() {
-    this.message.push('…');
+    /** Makes sure the tail only gets added once to ensure reusability */
+    if (this.message.last() !== '…') {
+      this.message.push('…');
+    }
+
     return super.send();
   }
 }

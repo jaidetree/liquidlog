@@ -23,6 +23,10 @@
     "url": "https://github.com/jayzawrotny/gutil-waterlog/issues"
   },
   "homepage": "https://github.com/jayzawrotny/gutil-waterlog#readme",
+  "dependencies": {
+    "gulp-util": "^3.0.7",
+    "moment": "^2.10.6"
+  },
   "devDependencies": {
     "babel-core": "^6.1.2",
     "babel-preset-es2015": "^6.1.2",

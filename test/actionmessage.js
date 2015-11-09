@@ -79,7 +79,7 @@ describe('ActionMessage', () => {
     it('should support the text param', () => {
       let message = new ActionMessage();
       message.text('Hi').line('world');
-      assert.equal(message.toString(), 'Hi \n world');
+      assert.equal(message.toString(), 'Hi \nworld');
     });
   });
 
