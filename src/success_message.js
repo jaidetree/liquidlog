@@ -1,10 +1,12 @@
-import TaskMessage from './taskmessage';
-import {colors} from 'gulp-util';
+'use strict';
+
+import TaskMessage from './task_message';
+import { colors } from 'gulp-util';
 
 /**
  * Success Message
  * An error message triggered from a gulp task. Formats the actions as green.
- * 
+ *
  * @class
  * @extends {TaskMessage}
  * @property {Message} message - Instance to the message pieces
@@ -12,8 +14,8 @@ import {colors} from 'gulp-util';
  * @property {string} plugin - Name of plugin log statement was called from
  * @property {string} icon - icon string to prepend when sending
  */
-export default class SuccessMessage extends TaskMessage {
-  constructor(plugin) {
+class SuccessMessage extends TaskMessage {
+  constructor (plugin) {
     // Call the parent constructor with the plugin & set the icon
     super(plugin);
     this.icon = this.color('✓');
@@ -30,7 +32,7 @@ export default class SuccessMessage extends TaskMessage {
    * @param {string} str - Successful action string to show
    * @returns {ErorMessage} Chainable instance ref to this
    */
-  action(str) {
+  action (str) {
     return super.action(this.color(str));
   }
 
@@ -40,11 +42,12 @@ export default class SuccessMessage extends TaskMessage {
    *
    * @method
    * @public
-   * @param {string} str - Text input 
+   * @param {string} text - Text input
    * @returns {string} Green colored terminal text
    */
-  color(text) {
+  color (text) {
     return colors.green.bold(colors.stripColor(text));
   }
 }
 
+export default SuccessMessage;

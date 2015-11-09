@@ -1,4 +1,4 @@
-import ProjectPath from '../lib/ProjectPath';
+import ProjectPath from '../lib/project_path';
 
 let paths = {
       cwd: process.env.INIT_CWD,

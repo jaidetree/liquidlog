@@ -1,11 +1,11 @@
 import moment from 'moment';
 
-const SECONDS = 1000;
-const MINUTES = SECONDS * 60;
-const HOURS = MINUTES * 60;
-const DAYS = HOURS * 24;
-const MONTHS = DAYS * 30;
-const YEARS = DAYS * 365;
+const SECONDS = 1000,
+      MINUTES = SECONDS * 60,
+      HOURS = MINUTES * 60,
+      DAYS = HOURS * 24,
+      MONTHS = DAYS * 30,
+      YEARS = DAYS * 365;
 
 /**
  * Timers
@@ -16,28 +16,28 @@ const YEARS = DAYS * 365;
  * @property {array} durations - Collection of durations
  * @property {object} index - Quick index to quickly refer to timers.
  */
-export default class Timers {
+class Timers {
   /**
    * Constructor
    * Initializes the timers class
    *
    * @constructor
    */
-  constructor() {
+  constructor () {
     this.durations = [];
     this.index = {};
   }
 
   /**
    * Diff
-   * Returns the difference between the start and end of a diff 
+   * Returns the difference between the start and end of a diff
    *
    * @method
    * @public
    * @param {object|string} data - Either duration object or timer name
    * @returns {int} Difference between start and end time in ms
    */
-  diff(data) {
+  diff (data) {
     /** We were given a name instead of a duration */
     if (typeof data === 'string') {
       data = this.get(data);
@@ -55,12 +55,11 @@ export default class Timers {
    * @param {object} data - Duration to return the elapsed time of
    * @returns {string} Elapsed time formatted as a string
    */
-  elapsed(data) {
-    let elapsed = '',
+  elapsed (data) {
+    let time = '',
         duration = '',
-        concat = (...args) => elapsed += ' ' + args.join(''),
+        concat = (...args) => time += ' ' + args.join(''),
         skipDays = false,
-        skipMs = false,
         diff;
 
     /** We were given a name instead of a duration */
@@ -114,7 +113,7 @@ export default class Timers {
     }
 
     /** A nice pretty string to use */
-    return elapsed.trim();
+    return time.trim();
   }
 
   /**
@@ -126,7 +125,7 @@ export default class Timers {
    * @param {string} name - Name of the timer to retrieve
    * @returns {object} The target duration object
    */
-  get(name) {
+  get (name) {
     try {
       return this.durations[this.index[name]];
     } catch (e) {
@@ -143,8 +142,8 @@ export default class Timers {
    * @param {string} name - Name of the timer starting
    * @returns {int} Start time in miliseconds since unix epoch
    */
-  start(name) {
-    let start = Date.now();
+  start (name) {
+    let time = Date.now();
 
     if (!name) {
       name = this.durations.length;
@@ -153,13 +152,13 @@ export default class Timers {
     /** Create our duration and update the index */
     this.durations.push({
       name: name,
-      start: start,
+      start: time,
       end: null
     });
 
     this.index[name] = this.durations.length - 1;
 
-    return start;
+    return time;
   }
 
   /**
@@ -172,7 +171,7 @@ export default class Timers {
    * @param {string} name - Name of the timer
    * @returns {string} Result of this.elapsed(name)
    */
-  stop(name) {
+  stop (name) {
     let duration;
 
     if (!name) {
@@ -188,4 +187,6 @@ export default class Timers {
     /** Returned the elapsed time in a cute stringj */
     return this.elapsed(duration);
   }
-};
+}
+
+export default Timers;

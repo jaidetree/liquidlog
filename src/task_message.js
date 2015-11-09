@@ -1,17 +1,18 @@
+'use strict';
+
 import Message from './message';
-import {colors} from 'gulp-util';
+import { colors } from 'gulp-util';
 
 /**
  * Task Message
  * A gulp-centric log statement that is chainable and easily customizable
- * 
+ *
  * @class
  * @property {Message} message - Instance to the message pieces
  * @property {string} type - Type of message this instance is
  * @property {string} plugin - Name of plugin log statement was called from
- * @property {string} [icon] - Optional icon string to prepend when sending
  */
-export default class TaskMessage {
+class TaskMessage {
   /**
    * Constructor
    * Constructs the base TaskMessage class
@@ -19,8 +20,8 @@ export default class TaskMessage {
    * @constructor
    * @param {string} [plugin] An optional plugin string for organization
    */
-  constructor(plugin) {
-    this.message = new Message(); 
+  constructor (plugin) {
+    this.message = new Message();
     this.type = 'text';
 
     // We have a plugin so lets create the message header.
@@ -43,7 +44,7 @@ export default class TaskMessage {
    * @param {string} str - The message string to format and add to the message
    * @returns {TaskMessage} Chainable instance reference
    */
-  action(str) {
+  action (str) {
     this.message.push(str);
     return this;
   }
@@ -57,7 +58,7 @@ export default class TaskMessage {
    * @param {string} str - The message string to format and add to the message
    * @returns {TaskMessage} Chainable instance reference
    */
-  data(str) {
+  data (str) {
     this.message.push(colors.magenta(str));
     return this;
   }
@@ -68,12 +69,13 @@ export default class TaskMessage {
    *
    * @method
    * @public
-   * @param {string} [char="-" - The character to use to render the rule
+   * @param {string} [char="-"] - The character to use to render the rule
    * @param {int} [width=MAX_COLUMNS] - Maximum number of columns in terminal
    * @param {string} [prefix='\n'] - Prefix before the newline
    * @param {string} [suffix=''] - Sufix at the end of the line
+   * @returns {TaskMessage} Chainable instance reference
    */
-  hr(char='-', width=process.stdout.columns, prefix='\n', suffix='') {
+  hr (char = '-', width = process.stdout.columns, prefix = '\n', suffix = '') {
     var isEmpty = this.message.length === 0;
 
     /** If the message is otherwise empty then account for timestamp */
@@ -96,8 +98,9 @@ export default class TaskMessage {
    * @method
    * @public
    * @param {string} str - Optional text to append after linebreak
+   * @returns {TaskMessage} Chainable instance reference
    */
-  line(str) {
+  line (str) {
     this.message.push('\n');
     if (str) {
       this.text(str);
@@ -112,8 +115,9 @@ export default class TaskMessage {
    *
    * @method
    * @public
+   * @returns {*} Result of message send
    */
-  send() {
+  send () {
     // If we have an icon put it at the beginning of the message
     if (this.icon) {
       this.message.unshift(this.icon);
@@ -131,7 +135,7 @@ export default class TaskMessage {
    * @param {string} str - The message string to format and add to the message
    * @returns {TaskMessage} Chainable instance reference
    */
-  text(str) {
+  text (str) {
     this.message.push(str);
     return this;
   }
@@ -145,7 +149,7 @@ export default class TaskMessage {
    * @param {string} str - The message string to format and add to the message
    * @returns {TaskMessage} Chainable instance reference
    */
-  time(str) {
+  time (str) {
     this.message.push('in');
     this.message.push(colors.cyan(str));
     return this;
@@ -159,7 +163,9 @@ export default class TaskMessage {
    * @public
    * @returns {string} The message in string form
    */
-  toString() {
+  toString () {
     return this.message.toString();
   }
 }
+
+export default TaskMessage;

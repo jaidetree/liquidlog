@@ -1,10 +1,12 @@
-import TaskMessage from './taskmessage';
-import {colors} from 'gulp-util';
+'use strict';
+
+import TaskMessage from './task_message';
+import { colors } from 'gulp-util';
 
 /**
  * Error Message
  * An error message triggered from a gulp task. Just formats most things red.
- * 
+ *
  * @class
  * @extends {TaskMessage}
  * @property {Message} message - Instance to the message pieces
@@ -12,8 +14,8 @@ import {colors} from 'gulp-util';
  * @property {string} plugin - Name of plugin log statement was called from
  * @property {string} icon - icon string to prepend when sending
  */
-export default class ErrorMessage extends TaskMessage {
-  constructor(plugin) {
+class ErrorMessage extends TaskMessage {
+  constructor (plugin) {
     // Call the parent constructor with the plugin & set the icon
     super(plugin);
     this.icon = this.color('⨉');
@@ -30,7 +32,7 @@ export default class ErrorMessage extends TaskMessage {
    * @param {string} str - Error string to show
    * @returns {ErorMessage} Chainable instance ref to this
    */
-  action(str) {
+  action (str) {
     return super.action(this.color('ERROR: ' + str));
   }
 
@@ -40,10 +42,10 @@ export default class ErrorMessage extends TaskMessage {
    *
    * @method
    * @public
-   * @param {string} str - Text input 
+   * @param {string} str - Text input
    * @returns {string} Red colored terminal text
    */
-  color(str) {
+  color (str) {
     return colors.red.bold(colors.stripColor(str));
   }
 
@@ -57,8 +59,9 @@ export default class ErrorMessage extends TaskMessage {
    * @param {string} str - Error string to show
    * @returns {ErorMessage} Chainable instance ref to this
    */
-  text(str) {
+  text (str) {
     return super.text(this.color(str));
   }
 }
 
+export default ErrorMessage;

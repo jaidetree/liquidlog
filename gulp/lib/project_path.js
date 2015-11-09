@@ -1,5 +1,6 @@
-import path from 'path';
+import fs from 'fs';
 import gutil from 'gulp-util';
+import path from 'path';
 
 /**
  * ProjectPath
@@ -17,11 +18,10 @@ export default class ProjectPath {
    * @constructor
    * @param {object} paths - Object of subobjects and strings
    */
-  constructor(paths) {
+  constructor (paths) {
     if (paths) {
-      this._paths = paths;
+      this.paths = paths;
     }
-
   }
 
   /**
@@ -31,8 +31,8 @@ export default class ProjectPath {
    * @method
    * @returns {object} Configured paths object
    */
-  get get() {
-    return this._paths;
+  get get () {
+    return this.paths;
   }
 
   /**
@@ -44,7 +44,7 @@ export default class ProjectPath {
    * @param {...string} paths - File paths to build into a single filepath
    * @returns {string} New filepath
    */
-  join(...args) {
+  join (...args) {
     return path.join(...args);
   }
 
@@ -58,8 +58,8 @@ export default class ProjectPath {
    * @param {string} filepath - File path to resolve
    * @returns {string} Resolved filepath
    */
-  resolve(basepath, filepath) {
-    var file = this.join(this.get.cwd, filepath);
+  resolve (basepath, filepath) {
+    var file = this.join(basepath, filepath);
 
     /**
      * See if it's just current working directory + filepath
@@ -85,9 +85,10 @@ export default class ProjectPath {
    *
    * @method
    * @public
+   * @param {string} filepath - Path string to split
    * @returns {array} All parts of the path
   **/
-  split(filepath) {
+  split (filepath) {
       return filepath.split(path.separator);
   }
 
@@ -100,7 +101,7 @@ export default class ProjectPath {
    * @param {...string} glob - Either a / separated string or all arguments
    * @returns {string} New filepath
   **/
-  to(...args) {
+  to (...args) {
     /** If the first argument doesn't start with the base, add it. */
     if (args[0].indexOf(this.get.dirs.base) === -1) {
       args.unshift(this.get.dirs.base);
@@ -119,7 +120,7 @@ export default class ProjectPath {
    * @param {string} to - The target file or directory
    * @returns {string} The relative path
   **/
-  from(base, to) {
+  from (base, to) {
     return path.relative(base, to);
   }
 
@@ -129,10 +130,10 @@ export default class ProjectPath {
    *
    * @method
    * @public
-   * @param {[type]} [varname] [description]
+   * @param {string} to - Target path to reach
    * @returns {string} The relative path to the target from the base.
   **/
-  fromJs(to) {
-    return this.from(this.get.js.dir, to); 
+  fromJs (to) {
+    return this.from(this.get.js.dir, to);
   }
 }

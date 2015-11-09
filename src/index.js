@@ -1,13 +1,9 @@
-import Message from './message';
-import TaskMessage from './taskmessage';
-import ActionMessage from './actionmessage';
-import StartMessage from './startmessage';
-import ErrorMessage from './errormessage';
-import SuccessMessage from './successmessage';
+import TaskMessage from './task_message';
+import ActionMessage from './action_message';
+import StartMessage from './start_message';
+import ErrorMessage from './error_message';
+import SuccessMessage from './success_message';
 import Timers from './timers';
-
-let gutil = require('gulp-util'),
-    colors = gutil.colors;
 
 /**
  * Log
@@ -36,13 +32,14 @@ let gutil = require('gulp-util'),
  * @class
  */
 export class Logger {
+
   /**
    * Constructor
    * Initializes our Logger class and creates the timers subinstance
    *
    * @constructor
    */
-  constructor() {
+  constructor () {
     this.timers = new Timers();
   }
 
@@ -54,14 +51,15 @@ export class Logger {
    *
    * @method
    * @public
-   * @param {TaskMessage} cls - A TaskMessage subclass
+   * @param {TaskMessage} Cls - A TaskMessage subclass
    * @param {...string} args - The plugin string if chainable interface
    *                           or a lot more if just a one off message
+   * @returns {message} A message instance
    */
-  buildMessage(cls, ...args) {
-    let message = new cls(args[0]);
+  buildMessage (Cls, ...args) {
+    let message = new Cls(args[0]);
 
-    /** 
+    /**
      * If we only have one argument it's the plugin so lets return the
      * chainable interface.
      */
@@ -73,7 +71,7 @@ export class Logger {
      * If just a simple task message just format the main string as text
      * otherwise assume it's an action
      */
-    if (cls === TaskMessage) {
+    if (Cls === TaskMessage) {
       message.text(args[1]);
     } else {
       message.action(args[1]);
@@ -109,7 +107,7 @@ export class Logger {
    * @param {string} plugin - Name of the plugin calling this log method
    * @returns {TaskMessage} A TaskMessage subclass
    */
-  error(...args) {
+  error (...args) {
     return this.buildMessage(ErrorMessage, ...args);
   }
 
@@ -122,7 +120,7 @@ export class Logger {
    * @param {string} plugin - Name of the plugin calling this log method
    * @returns {TaskMessage} A TaskMessage subclass
    */
-  start(...args) {
+  start (...args) {
     return this.buildMessage(StartMessage, ...args);
   }
 
@@ -135,7 +133,7 @@ export class Logger {
    * @param {string} plugin - Name of the plugin calling this log method
    * @returns {TaskMessage} A TaskMessage subclass
    */
-  success(...args) {
+  success (...args) {
     return this.buildMessage(SuccessMessage, ...args);
   }
 
@@ -148,7 +146,7 @@ export class Logger {
    * @param {string} plugin - Name of the plugin calling this log method
    * @returns {TaskMessage} A TaskMessage subclass
    */
-  task(...args) {
+  task (...args) {
     return this.buildMessage(ActionMessage, ...args);
   }
 
@@ -161,7 +159,7 @@ export class Logger {
    * @param {string} plugin - Name of the plugin calling this log method
    * @returns {TaskMessage} A TaskMessage subclass
    */
-  text(...args) {
+  text (...args) {
     return this.buildMessage(TaskMessage, null, ...args);
   }
 
@@ -174,7 +172,7 @@ export class Logger {
    * @param {string} name - Name of the timer to create
    * @returns {int} milliseconds since the unix epoch
    */
-  time(name) {
+  time (name) {
     return this.timers.start(name);
   }
 
@@ -187,7 +185,7 @@ export class Logger {
    * @param {string} name - Name of the timer to stop
    * @returns {string} Elapsed time formatted as a strng with a unit
    */
-  timeEnd(name) {
+  timeEnd (name) {
     return this.timers.stop(name);
   }
 }

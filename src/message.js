@@ -1,9 +1,11 @@
+'use strict';
+
 import gutil from 'gulp-util';
 
 /**
  * Message
  */
-export default class Message {
+class Message {
   /**
    * Constructor
    * Initializes the message class
@@ -11,7 +13,7 @@ export default class Message {
    * @constructor
    * @param {array} message - Array of messages
    */
-  constructor(message) {
+  constructor (message) {
     this.message = Array.isArray(message) ? message : [];
   }
 
@@ -19,11 +21,11 @@ export default class Message {
    * Length (getter)
    * Returns the # of message parts
    *
-   * @property
+   * @method
    * @public
    * @returns {int} length of messages array
    */
-  get length() {
+  get length () {
     return this.message.length;
   }
 
@@ -35,7 +37,7 @@ export default class Message {
    * @public
    * @returns {Message} new message with a clone of the message array
    */
-  clone() {
+  clone () {
     return new Message(this.message.slice());
   }
 
@@ -47,7 +49,7 @@ export default class Message {
    * @public
    * @returns {string} Last message part
    */
-  last() {
+  last () {
     return this.message[this.message.length - 1];
   }
 
@@ -59,7 +61,7 @@ export default class Message {
    * @public
    * @returns {string} Last message string
    */
-  pop() {
+  pop () {
     return this.message.pop();
   }
 
@@ -72,7 +74,7 @@ export default class Message {
    * @param {...string} args - Sub message pieces to make up a single word
    * @returns {Message} chainable instance
    */
-  push(...args) {
+  push (...args) {
     let str = args.join('');
     this.message.push(str);
     return this;
@@ -84,9 +86,11 @@ export default class Message {
    *
    * @method
    * @public
+   * @returns {Message} chainable instance
    */
-  send() {
-    return gutil.log(this.toString());
+  send () {
+    gutil.log(this.toString());
+    return this;
   }
 
   /**
@@ -97,7 +101,7 @@ export default class Message {
    * @public
    * @returns {string} first item removed from the array
    */
-  shift() {
+  shift () {
     return this.message.shift();
   }
 
@@ -109,7 +113,7 @@ export default class Message {
    * @public
    * @returns {string} String format of the message separated into words.
    */
-  toString() {
+  toString () {
     return this.message.join(' ').replace(/\n /g, '\n');
   }
 
@@ -122,10 +126,11 @@ export default class Message {
    * @param {...string} args - Strings to combine into a word
    * @returns {Message} Chainable instance reference
    */
-  unshift(...args) {
+  unshift (...args) {
     let str = args.join('');
     this.message.unshift(str);
     return this;
   }
 }
 
+export default Message;
