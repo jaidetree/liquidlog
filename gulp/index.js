@@ -1,6 +1,6 @@
 /* eslint no-console: 0 */
-import './tasks';
 import gulp from 'gulp';
+export * from './tasks';
 
 /**
  * Use module.exports here because the transpiler will not transpile
@@ -12,3 +12,4 @@ import gulp from 'gulp';
 gulp.task('air', function () {
     console.log('b(^_^)v');
 });
+
