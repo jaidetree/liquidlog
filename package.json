@@ -1,0 +1,31 @@
+{
+  "name": "gutil-waterlog",
+  "version": "1.0.0",
+  "description": "A simple log abstraction library to make gulp logging faster & more colorful.",
+  "main": "index.js",
+  "scripts": {
+    "test": "gulp test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jayzawrotny/gutil-waterlog.git"
+  },
+  "keywords": [
+    "gulp",
+    "log",
+    "abstraction",
+    "gulp-log",
+    "gulp-util"
+  ],
+  "author": "Jay Zawrotny <jayzawrotny@gmail.com>",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/jayzawrotny/gutil-waterlog/issues"
+  },
+  "homepage": "https://github.com/jayzawrotny/gutil-waterlog#readme",
+  "devDependencies": {
+    "babel-core": "^6.1.2",
+    "babel-preset-es2015": "^6.1.2",
+    "venuebook-gulp": "file:gulp"
+  }
+}
