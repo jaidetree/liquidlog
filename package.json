@@ -1,6 +1,6 @@
 {
   "name": "gutil-waterlog",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "A simple log abstraction library to make gulp logging faster & more colorful.",
   "main": "index.js",
   "scripts": {
