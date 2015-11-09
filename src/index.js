@@ -36,19 +36,6 @@ let gutil = require('gulp-util'),
  */
 export class Logger {
   /**
-   * Action
-   * A method to create an action message
-   *
-   * @method
-   * @public
-   * @param {string} plugin - Name of the plugin calling this log method
-   * @returns {TaskMessage} A TaskMessage subclass
-   */
-  action(...args) {
-    return this.buildMessage(ActionMessage, ...args);
-  }
-
-  /**
    * Build Message
    * Creates an instance of the message type. If we are given a bunch of
    * arguments then we assume the user just wants to send it. Otherwise
@@ -139,6 +126,19 @@ export class Logger {
    */
   success(...args) {
     return this.buildMessage(SuccessMessage, ...args);
+  }
+
+  /**
+   * Task
+   * A method to create an task message
+   *
+   * @method
+   * @public
+   * @param {string} plugin - Name of the plugin calling this log method
+   * @returns {TaskMessage} A TaskMessage subclass
+   */
+  task(...args) {
+    return this.buildMessage(ActionMessage, ...args);
   }
 
   /**

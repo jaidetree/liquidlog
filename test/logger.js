@@ -15,51 +15,6 @@ describe('Logger', () => {
     });
   });
 
-  describe('#action', () => {
-    it('should build an action message', () => {
-      let logger = new Logger(),
-          message = logger.action();
-
-      message.text('Hello world');
-
-      assert.equal(message.type, 'action');
-      assert.equal(message.toString(), 'Hello world');
-    });
-
-    it('should support sending immediately', () => {
-      let logger = new Logger(),
-          ceptor = new StdoutInterceptor(),
-          message, output;
-
-
-      ceptor.capture();
-      message = logger.action('test', 'Testing logger library');
-      output = ceptor.release();
-
-      assert.equal(clean(output), '• [TEST]: Testing logger library');
-    });
-
-    it('should support colored formatting', () => {
-      let logger = new Logger(),
-          ceptor = new StdoutInterceptor(),
-          message, output;
-
-
-      ceptor.capture();
-      message = logger.action('test')
-        .action('Tested')
-        .data('this library')
-        .text('again')
-        .send();
-
-      ceptor.release();
-
-      output = ceptor.getOutput();
-
-      assert.equal(clean(output), '\u001b[90m•\u001b[39m \u001b[37m[\u001b[39m\u001b[36mTEST\u001b[39m\u001b[37m]:\u001b[39m Tested \u001b[35mthis library\u001b[39m again');
-    });
-  });
-
   describe('#error', () => {
     it('should build an error message', () => {
       let logger = new Logger(),
@@ -189,6 +144,51 @@ describe('Logger', () => {
       output = ceptor.getOutput();
 
       assert.equal(clean(output), '\u001b[32m\u001b[1m✓\u001b[22m\u001b[39m \u001b[37m[\u001b[39m\u001b[36mTEST\u001b[39m\u001b[37m]:\u001b[39m \u001b[32m\u001b[1mTested\u001b[22m\u001b[39m \u001b[35mthis\u001b[39m');
+    });
+  });
+
+  describe('#task', () => {
+    it('should build an action message', () => {
+      let logger = new Logger(),
+          message = logger.task();
+
+      message.text('Hello world');
+
+      assert.equal(message.type, 'action');
+      assert.equal(message.toString(), 'Hello world');
+    });
+
+    it('should support sending immediately', () => {
+      let logger = new Logger(),
+          ceptor = new StdoutInterceptor(),
+          message, output;
+
+
+      ceptor.capture();
+      message = logger.task('test', 'Testing logger library');
+      output = ceptor.release();
+
+      assert.equal(clean(output), '• [TEST]: Testing logger library');
+    });
+
+    it('should support colored formatting', () => {
+      let logger = new Logger(),
+          ceptor = new StdoutInterceptor(),
+          message, output;
+
+
+      ceptor.capture();
+      message = logger.task('test')
+        .action('Tested')
+        .data('this library')
+        .text('again')
+        .send();
+
+      ceptor.release();
+
+      output = ceptor.getOutput();
+
+      assert.equal(clean(output), '\u001b[90m•\u001b[39m \u001b[37m[\u001b[39m\u001b[36mTEST\u001b[39m\u001b[37m]:\u001b[39m Tested \u001b[35mthis library\u001b[39m again');
     });
   });
 
