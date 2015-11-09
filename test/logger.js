@@ -174,7 +174,6 @@ describe('Logger', () => {
           ceptor = new StdoutInterceptor(),
           output;
 
-
       ceptor.capture();
       logger.task('test')
         .action('Tested')
