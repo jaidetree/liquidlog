@@ -157,7 +157,7 @@ Render your message as a string if you want to do other things to it. Note gutil
 
 ## License
 
-GPL-2.0 (c) 2015 Jay Zawrotny (jayzawrotny@gmail.com)
+BSD-3-Clause (c) 2015 Jay Zawrotny (jayzawrotny@gmail.com)
 
 [screenshot-image]: https://github.com/jayzawrotny/gutil-waterlog/raw/master/docs/images/screenshot_1.png
 
