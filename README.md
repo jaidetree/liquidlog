@@ -75,7 +75,7 @@ gulp.task('example', function () {
 
 ## API
 
-### log.<message type>([plugin], [action, data, time])
+### log.__message type__([plugin], [action, data, time])
 {string} `plugin` - Optional string to show which plugin\group is calling the log message.
 
 #### Quick-send Params
