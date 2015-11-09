@@ -75,14 +75,14 @@ gulp.task('example', function () {
 
 ## API
 
-### log.__message type__([plugin], [action, data, time])
+### log._message type_([plugin], [action, data, time])
 {string} `plugin` - Optional string to show which plugin\group is calling the log message.
 
 #### Quick-send Params
 Including these optional params will not return a message object but instead directly send the message to the console.
 
 ```js
-log.task('build', 'Bulding JS file', file.relative, moment('MM/DD/YYYY hh:mmA'));
+  log.task('build', 'Bulding JS file', file.relative, moment('MM/DD/YYYY hh:mmA'));
 ```
 
 {string} `action` - When present message is sent directly to console
@@ -117,6 +117,14 @@ Creates an action based message recommended for when tasks just sort of happen.
 The message object allows you to add many different types of phrases and stylings before sending it to the console. This allows you to make reusable messages and prettier debug statements fairly painlessly. When the message type methods are given one or less parameter they return the composable, chainable message instance.
 
 > __Protip:__ When using the message API be sure to call the `send` method at the end of your chained methods to send it to the console.
+
+```js
+  log.success('example')      
+    .action('Compiled js file')
+    .data(file.relative)
+    .time(log.timeEnd('example'))
+    .send();
+```
 
 #### action(text)
 Adds a contextually styled action text phrase. In a regular text message it will be the default console text color. In an error message type it is red, in a success message type it is green.
