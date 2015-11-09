@@ -1,5 +1,7 @@
+/* global describe, it */
+
 import assert from 'assert';
-import StdoutInterceptor from './lib/StdoutInterceptor';
+import StdoutInterceptor from './lib/stdout_interceptor';
 import ActionMessage from '../src/action_message';
 
 describe('ActionMessage', () => {
@@ -12,11 +14,11 @@ describe('ActionMessage', () => {
     it('should initialize properly', () => {
       let message = new ActionMessage();
       assert.equal(message.type, 'action');
-      assert.notEqual(message.message, undefined);
+      assert.notEqual(typeof message.message, 'undefined');
     });
 
     it('should have methods', () => {
-      let methods = Object.getOwnPropertyNames(ActionMessage.prototype.__proto__);
+      let methods = Object.getOwnPropertyNames(Object.getPrototypeOf(ActionMessage.prototype));
       assert.deepEqual(methods, ['constructor', 'action', 'data', 'hr', 'line', 'send', 'text', 'time', 'toString']);
     });
   });
@@ -132,5 +134,4 @@ describe('ActionMessage', () => {
       assert.equal(message.toString(), 'Test test');
     });
   });
-
 });

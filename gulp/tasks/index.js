@@ -4,7 +4,6 @@
 import glob from 'glob';
 import path from 'path';
 import log from '../../src';
-import paths from '../config/paths';
 
 
 var files = [],
@@ -38,7 +37,7 @@ files = files.filter(function (file) {
  * Loop through each file then import it if the module
  * could not be imported display an error message.
  */
-files.forEach(function (filename) {
+files.forEach((filename) => {
   var name = path.basename(filename, '.js');
 
   try {

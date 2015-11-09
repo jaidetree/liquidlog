@@ -1,3 +1,4 @@
+/* global describe, it */
 import assert from 'assert';
 import Timers from '../src/timers';
 

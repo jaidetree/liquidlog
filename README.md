@@ -17,10 +17,11 @@ gulp.task('example', function () {
     .action('Building JS...')
     .hr()
     .send();
+
   return gulp.src('src/**/*.js')
     .pipe(tap(function (file) {
       log.time('example');
-      log.start('example')      
+      log.start('example')
         .action('Compiling js file')
         .data(file.relative)
         .send();
@@ -35,7 +36,7 @@ gulp.task('example', function () {
     })
     // .pipe(gulp.dest('lib'))
     .pipe(tap(function (file) {
-      log.success('example')      
+      log.success('example')
         .action('Compiled js file')
         .data(file.relative)
         .time(log.timeEnd('example'))
@@ -68,6 +69,7 @@ gulp.task('example', function () {
         .hr()
         .send();
     });
+});
 });
 ```
 

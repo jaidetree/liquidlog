@@ -28,7 +28,7 @@ var config = {
  * @param {TransformStream} stream - A gulp vinyl transform stream
  * @returns {TransformStream} The resulting stream from the transformations
  */
-function build(stream) {
+function build (stream) {
   return stream
     .pipe(plumber())
     .pipe(tap((file) => {

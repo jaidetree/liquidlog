@@ -25,17 +25,17 @@ let config = {
         node: true
       },
       globals: {
-        'require': true,
-        'DataBootstrap': true,
-        'CKEDITOR': true,
-        'Backbone': true,
-        'React': true,
-        'Braintree': true,
-        'google': true,
-        'Raven': true,
-        'mixpanel': true
+        require: true,
+        DataBootstrap: true,
+        CKEDITOR: true,
+        Backbone: true,
+        React: true,
+        Braintree: true,
+        google: true,
+        Raven: true,
+        mixpanel: true
       },
-      ecmaFeatures: { 
+      ecmaFeatures: {
         arrowFunctions: true,
         binaryLiterals: true,
         blockBindings: true,
@@ -63,7 +63,7 @@ let config = {
       },
 
       rules: {
-        ////////// Possible Errors //////////
+        // ---------- Possible Errors ----------
 
         'comma-dangle': 2,               // disallow trailing commas in object literals
         'no-cond-assign': 2,             // disallow assignment in conditional expressions
@@ -85,16 +85,15 @@ let config = {
         'no-negated-in-lhs': 2,          // disallow negation of the left operand of an in expression
         'no-obj-calls': 2,               // disallow the use of object properties of the global object (Math and JSON) as functions
         'no-regex-spaces': 2,            // disallow multiple spaces in a regular expression literal
-        'quote-props': 2,                // disallow reserved words being used as object literal keys (off by default)
         'no-sparse-arrays': 2,           // disallow sparse arrays
         'no-unreachable': 2,             // disallow unreachable statements after a return, throw, continue, or break statement
         'use-isnan': 2,                  // disallow comparisons with the value NaN
         'valid-jsdoc': [2, {             // Ensure JSDoc comments are valid (off by default)
-          "requireReturn": false
-        }],                
-        'valid-typeof': 2,               // Ensure that the results of typeof are compared against a valid string 
+          requireReturn: false
+        }],
+        'valid-typeof': 2,               // Ensure that the results of typeof are compared against a valid string
 
-        ////////// Best Practices //////////
+        // ---------- Best Practices ----------
 
         'block-scoped-var': 1,      // treat var statements as if they were block scoped (off by default)
         'complexity': 1,            // specify the maximum cyclomatic complexity allowed in a program (off by default)
@@ -144,7 +143,7 @@ let config = {
         'wrap-iife': 1,             // require immediate function invocation to be wrapped in parentheses (off by default)
         'yoda': 1,                  // require or disallow Yoda conditions
 
-        ////////// Variables //////////
+        // ---------- Variables ----------
 
         'no-catch-shadow': 1,             // disallow the catch clause parameter name being the same as a variable in the outer scope (off by default in the node environment)
         'no-delete-var': 1,               // disallow deletion of variables
@@ -157,7 +156,7 @@ let config = {
         'no-unused-vars': 1,              // disallow declaration of variables that are not used in the code
         'no-use-before-define': 1,        // disallow use of variables before they are defined
 
-        ///////// Stylistic Issues //////////
+        // ---------- Stylistic Issues ----------
 
         'array-bracket-spacing': [1, 'never'],         // enforce bracket spacing
         'brace-style': 1,                              // enforce one true brace style (off by default)
@@ -167,14 +166,14 @@ let config = {
         'computed-property-spacing': [2, 'never'],     // enforce consistent spacing between computer properties in inline object creation
         'consistent-this': 1,                          // enforces consistent naming when capturing the current execution context (off by default)
         'eol-last': 1,                                 // enforce newline at the end of file, with no multiple empty lines
-        'func-names': 1,                               // require function expressions to have a name (off by default)
-        'func-style': 1,                               // enforces use of function declarations or expressions (off by default)
+        'func-names': 0,                               // require function expressions to have a name (off by default)
+        'func-style': [1, 'declaration'],              // enforces use of function declarations or expressions (off by default)
         'key-spacing': 1,                              // enforces spacing between keys and values in object literal properties
         'max-nested-callbacks': 1,                     // specify the maximum depth callbacks can be nested (off by default)
         'new-cap': 1,                                  // require a capital letter for constructors
         'new-parens': 1,                               // disallow the omission of parentheses when invoking a constructor with no arguments
         'no-array-constructor': 1,                     // disallow use of the Array constructor
-        'no-inline-comments': 1,                       // disallow comments inline after code (off by default)
+        'no-inline-comments': 0,                       // disallow comments inline after code (off by default)
         'no-lonely-if': 1,                             // disallow if as the only statement in an else block (off by default)
         'no-mixed-spaces-and-tabs': 1,                 // disallow mixed spaces and tabs for indentation
         'no-multiple-empty-lines': 1,                  // disallow multiple empty lines (off by default)
@@ -184,7 +183,6 @@ let config = {
         'no-ternary': 0,                               // disallow the use of ternary operators (off by default)
         'no-trailing-spaces': 1,                       // disallow trailing whitespace at the end of lines
         'no-underscore-dangle': 1,                     // disallow dangling underscores in identifiers
-        'no-extra-parens': 1,                          // disallow wrapping of non-IIFE statements in parens
         'one-var': 1,                                  // allow just one var statement per function (off by default)
         'operator-assignment': 1,                      // require assignment operator shorthand where possible or prohibit it entirely (off by default)
         'padded-blocks': [1, 'never'],                 // enforce padding within blocks (off by default)
@@ -203,11 +201,11 @@ let config = {
         'space-unary-ops': 1,                          // Require or disallow spaces before/after unary operators (words on by default, nonwords off by default)
         'spaced-comment': 1,                           // require or disallow a space immediately following the // in a line comment (off by default)
         'wrap-regex': 1,                               // require regex literals to be wrapped in parentheses (off by default)
-        
-        ////////// ECMAScript 6 //////////
+
+        // ---------- ECMAScript 6 ----------
 
         'no-var': 0,          // require let or const instead of var (off by default)
-        'generator-star': 0,  // enforce the position of the * in generator functions (off by default)
+        'generator-star': 0  // enforce the position of the * in generator functions (off by default)
       }
     };
 
@@ -218,14 +216,10 @@ let config = {
  * @param {TransformStream} stream - A gulp vinyl transform stream
  * @returns {TransformStream} The resulting stream from the transformations
  */
-function lint(stream) {
-  let hasErrors = false;
+function lint (stream) {
   return stream
     .pipe(plumber({
-      errorHandler: function () {
-        console.log(eslint);
-        hasErrors = true;
-      }
+      errorHandler: function () {}
     }))
     /** Log that we are linting the file */
     .pipe(tap((file) => {

@@ -10,7 +10,6 @@ import mocha from 'gulp-mocha';
 import plumber from 'gulp-plumber';
 import watch from 'gulp-watch';
 
-import log from '../../src';
 import paths from '../config/paths';
 
 paths.get.test = {};
@@ -20,8 +19,8 @@ paths.get.test.watch = [
   paths.get.test.src
 ];
 
-function test() {
-  return gulp.src(paths.get.test.src, { read: false})
+function test () {
+  return gulp.src(paths.get.test.src, { read: false })
     .pipe(plumber())
     .pipe(mocha({
       bail: true
@@ -37,7 +36,7 @@ gulp.task('test', function () {
  * Runs a watcher on all src js files and tests them when changed.
  */
 gulp.task('watch-test', function () {
-  return watch(paths.get.test.watch, (file) => {
+  return watch(paths.get.test.watch, () => {
     return test();
   });
 });

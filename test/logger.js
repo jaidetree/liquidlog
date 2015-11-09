@@ -1,8 +1,10 @@
-import assert from 'assert';
-import StdoutInterceptor from './lib/StdoutInterceptor';
-import {Logger} from '../src/';
+/* global describe, it */
 
-function clean(str) {
+import assert from 'assert';
+import StdoutInterceptor from './lib/stdout_interceptor';
+import { Logger } from '../src/';
+
+function clean (str) {
   var s = str.toString().trim();
   return s.slice(s.indexOf(' ') + 1);
 }
@@ -29,11 +31,11 @@ describe('Logger', () => {
     it('should support sending immediately', () => {
       let logger = new Logger(),
           ceptor = new StdoutInterceptor(),
-          message, output;
+          output;
 
 
       ceptor.capture();
-      message = logger.error('test', 'Testing logger library');
+      logger.error('test', 'Testing logger library');
       output = ceptor.release();
 
       assert.equal(clean(output), '⨉ [TEST]: ERROR: Testing logger library');
@@ -42,18 +44,16 @@ describe('Logger', () => {
     it('should support colored formatting', () => {
       let logger = new Logger(),
           ceptor = new StdoutInterceptor(),
-          message, output;
-
+          output;
 
       ceptor.capture();
-      message = logger.error('test')
+      logger.error('test')
         .action('Tested')
         .data('this')
         .send();
 
       ceptor.release();
-
-      output = ceptor.getOutput();
+      output = ceptor.toString();
 
       assert.equal(clean(output), '\u001b[31m\u001b[1m⨉\u001b[22m\u001b[39m \u001b[37m[\u001b[39m\u001b[36mTEST\u001b[39m\u001b[37m]:\u001b[39m \u001b[31m\u001b[1mERROR: Tested\u001b[22m\u001b[39m \u001b[35mthis\u001b[39m');
     });
@@ -73,11 +73,11 @@ describe('Logger', () => {
     it('should support sending immediately', () => {
       let logger = new Logger(),
           ceptor = new StdoutInterceptor(),
-          message, output;
+          output;
 
 
       ceptor.capture();
-      message = logger.start('test', 'Testing logger library');
+      logger.start('test', 'Testing logger library');
       output = ceptor.release();
 
       assert.equal(clean(output), '» [TEST]: Testing logger library …');
@@ -86,18 +86,17 @@ describe('Logger', () => {
     it('should support colored formatting', () => {
       let logger = new Logger(),
           ceptor = new StdoutInterceptor(),
-          message, output;
+          output;
 
 
       ceptor.capture();
-      message = logger.start('test')
+      logger.start('test')
         .action('Tested')
         .data('this')
         .send();
 
       ceptor.release();
-
-      output = ceptor.getOutput();
+      output = ceptor.toString();
 
       assert.equal(clean(output), '\u001b[32m\u001b[1m»\u001b[22m\u001b[39m \u001b[37m[\u001b[39m\u001b[36mTEST\u001b[39m\u001b[37m]:\u001b[39m Tested \u001b[35mthis\u001b[39m …');
     });
@@ -117,11 +116,11 @@ describe('Logger', () => {
     it('should support sending immediately', () => {
       let logger = new Logger(),
           ceptor = new StdoutInterceptor(),
-          message, output;
+          output;
 
 
       ceptor.capture();
-      message = logger.success('test', 'Testing logger library');
+      logger.success('test', 'Testing logger library');
       output = ceptor.release();
 
       assert.equal(clean(output), '✓ [TEST]: Testing logger library');
@@ -130,18 +129,17 @@ describe('Logger', () => {
     it('should support colored formatting', () => {
       let logger = new Logger(),
           ceptor = new StdoutInterceptor(),
-          message, output;
+          output;
 
 
       ceptor.capture();
-      message = logger.success('test')
+      logger.success('test')
         .action('Tested')
         .data('this')
         .send();
-
       ceptor.release();
 
-      output = ceptor.getOutput();
+      output = ceptor.toString();
 
       assert.equal(clean(output), '\u001b[32m\u001b[1m✓\u001b[22m\u001b[39m \u001b[37m[\u001b[39m\u001b[36mTEST\u001b[39m\u001b[37m]:\u001b[39m \u001b[32m\u001b[1mTested\u001b[22m\u001b[39m \u001b[35mthis\u001b[39m');
     });
@@ -161,11 +159,11 @@ describe('Logger', () => {
     it('should support sending immediately', () => {
       let logger = new Logger(),
           ceptor = new StdoutInterceptor(),
-          message, output;
+          output;
 
 
       ceptor.capture();
-      message = logger.task('test', 'Testing logger library');
+      logger.task('test', 'Testing logger library');
       output = ceptor.release();
 
       assert.equal(clean(output), '• [TEST]: Testing logger library');
@@ -174,19 +172,18 @@ describe('Logger', () => {
     it('should support colored formatting', () => {
       let logger = new Logger(),
           ceptor = new StdoutInterceptor(),
-          message, output;
+          output;
 
 
       ceptor.capture();
-      message = logger.task('test')
+      logger.task('test')
         .action('Tested')
         .data('this library')
         .text('again')
         .send();
-
       ceptor.release();
 
-      output = ceptor.getOutput();
+      output = ceptor.toString();
 
       assert.equal(clean(output), '\u001b[90m•\u001b[39m \u001b[37m[\u001b[39m\u001b[36mTEST\u001b[39m\u001b[37m]:\u001b[39m Tested \u001b[35mthis library\u001b[39m again');
     });
@@ -206,11 +203,10 @@ describe('Logger', () => {
     it('should support sending immediately', () => {
       let logger = new Logger(),
           ceptor = new StdoutInterceptor(),
-          message, output;
-
+          output;
 
       ceptor.capture();
-      message = logger.text('test', 'Testing logger library');
+      logger.text('test', 'Testing logger library');
       output = ceptor.release();
 
       assert.equal(clean(output), 'test Testing logger library');
@@ -219,18 +215,16 @@ describe('Logger', () => {
     it('should support colored formatting', () => {
       let logger = new Logger(),
           ceptor = new StdoutInterceptor(),
-          message, output;
-
+          output;
 
       ceptor.capture();
-      message = logger.text()
+      logger.text()
         .action('Tested')
         .data('this')
         .send();
-
       ceptor.release();
 
-      output = ceptor.getOutput();
+      output = ceptor.toString();
 
       assert.equal(clean(output), 'Tested \u001b[35mthis\u001b[39m');
     });

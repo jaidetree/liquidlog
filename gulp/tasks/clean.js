@@ -6,21 +6,16 @@
  * gulp clean
 */
 import gulp from 'gulp';
-import gutil from 'gulp-util';
 import del from 'del';
-import fs from 'fs';
 import path from 'path';
-
 import log from '../../src';
 import paths from '../config/paths';
 
 paths.clean = [
-  paths.to(paths.get.js.dest, '**'),
+  paths.to(paths.get.js.dest, '**')
 ];
 
 gulp.task('clean', function () {
-  var cleanedFiles = 0;
-
   return paths.clean.forEach(function (file) {
     var dir = path.dirname(file),
         files = [];
@@ -39,4 +34,4 @@ gulp.task('clean', function () {
   });
 });
 
-export default path;
+export default paths;

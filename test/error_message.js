@@ -1,5 +1,7 @@
+/* global describe, it */
+
 import assert from 'assert';
-import StdoutInterceptor from './lib/StdoutInterceptor';
+import StdoutInterceptor from './lib/stdout_interceptor';
 import ErrorMessage from '../src/error_message';
 
 describe('ErrorMessage', () => {
@@ -12,11 +14,11 @@ describe('ErrorMessage', () => {
     it('should initialize properly', () => {
       let message = new ErrorMessage();
       assert.equal(message.type, 'error');
-      assert.notEqual(message.message, undefined);
+      assert.notEqual(typeof message.message, 'undefined');
     });
 
     it('should have methods', () => {
-      let methods = Object.getOwnPropertyNames(ErrorMessage.prototype.__proto__);
+      let methods = Object.getOwnPropertyNames(Object.getPrototypeOf(ErrorMessage.prototype));
       assert.deepEqual(methods, ['constructor', 'action', 'data', 'hr', 'line', 'send', 'text', 'time', 'toString']);
     });
   });
@@ -132,5 +134,4 @@ describe('ErrorMessage', () => {
       assert.equal(message.toString(), '\u001b[31m\u001b[1mTest\u001b[22m\u001b[39m \u001b[31m\u001b[1mtest\u001b[22m\u001b[39m');
     });
   });
-
 });

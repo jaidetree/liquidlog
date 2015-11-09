@@ -1,5 +1,5 @@
 import assert from 'assert';
-import StdoutInterceptor from './lib/StdoutInterceptor';
+import StdoutInterceptor from './lib/stdout_interceptor';
 import Message from '../src/message';
 
 describe('Message', () => {

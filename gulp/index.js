@@ -1,3 +1,4 @@
+/* eslint no-console: 0 */
 import './tasks';
 import gulp from 'gulp';
 
@@ -8,6 +9,6 @@ import gulp from 'gulp';
 
 /** Load tasks with our instance of gulp */
 
-gulp.task('default', function () {
+gulp.task('air', function () {
     console.log('b(^_^)v');
 });
