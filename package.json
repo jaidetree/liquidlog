@@ -18,7 +18,7 @@
     "gulp-util"
   ],
   "author": "Jay Zawrotny <jayzawrotny@gmail.com>",
-  "license": "GPL-2.0",
+  "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/jayzawrotny/gutil-waterlog/issues"
   },
