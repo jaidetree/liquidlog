@@ -1,3 +1,4 @@
+/* eslint quote-props: [0, "consistent-as-needed"] */
 /**
  * Lint
  * Lints our js
@@ -89,7 +90,7 @@ let config = {
         'no-unreachable': 2,             // disallow unreachable statements after a return, throw, continue, or break statement
         'use-isnan': 2,                  // disallow comparisons with the value NaN
         'valid-jsdoc': [2, {             // Ensure JSDoc comments are valid (off by default)
-          requireReturn: false
+          'requireReturn': false
         }],
         'valid-typeof': 2,               // Ensure that the results of typeof are compared against a valid string
 
@@ -167,7 +168,9 @@ let config = {
         'consistent-this': 1,                          // enforces consistent naming when capturing the current execution context (off by default)
         'eol-last': 1,                                 // enforce newline at the end of file, with no multiple empty lines
         'func-names': 0,                               // require function expressions to have a name (off by default)
-        'func-style': [1, 'declaration'],              // enforces use of function declarations or expressions (off by default)
+        'func-style': [1, 'declaration', {             // enforces use of function declarations or expressions (off by default)
+          'allowArrowFunctions': true
+        }],
         'key-spacing': 1,                              // enforces spacing between keys and values in object literal properties
         'max-nested-callbacks': 1,                     // specify the maximum depth callbacks can be nested (off by default)
         'new-cap': 1,                                  // require a capital letter for constructors
@@ -219,7 +222,7 @@ let config = {
 function lint (stream) {
   return stream
     .pipe(plumber({
-      errorHandler: function () {}
+      errorHandler: () => {}
     }))
     /** Log that we are linting the file */
     .pipe(tap((file) => {
@@ -250,7 +253,7 @@ function lint (stream) {
  * Task Autolint
  * Runs a watcher on all src js files and lints them when changed.
  */
-gulp.task('autolint', function () {
+gulp.task('autolint', () => {
   return watch(paths.get.js.src, (file) => {
     return lint(gulp.src(file.path));
   });
@@ -260,7 +263,7 @@ gulp.task('autolint', function () {
  * Task Lint
  * Lints a file or all js src files
  */
-gulp.task('lint', function () {
+gulp.task('lint', () => {
   var opts = minimist(process.argv.slice(2)),
       file = opts.file || opts.f || paths.get.js.src;
 

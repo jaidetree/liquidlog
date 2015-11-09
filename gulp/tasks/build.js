@@ -51,7 +51,7 @@ function build (stream) {
  * Task Watch Build
  * Runs a watcher on all src js files and builds them when changed.
  */
-gulp.task('watch-build', function () {
+gulp.task('watch-build', () => {
   return watch(paths.get.js.src, (file) => {
     return build(gulp.src(file.path));
   });
@@ -61,7 +61,7 @@ gulp.task('watch-build', function () {
  * Task builds
  * Builds a file or all js src files
  */
-gulp.task('build', function () {
+gulp.task('build', () => {
   var opts = minimist(process.argv.slice(2)),
       file = opts.file || opts.f || paths.get.js.src;
 

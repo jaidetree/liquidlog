@@ -27,7 +27,7 @@ function test () {
     }));
 }
 
-gulp.task('test', function () {
+gulp.task('test', () => {
   return test();
 });
 
@@ -35,7 +35,7 @@ gulp.task('test', function () {
  * Task Watch Test
  * Runs a watcher on all src js files and tests them when changed.
  */
-gulp.task('watch-test', function () {
+gulp.task('watch-test', () => {
   return watch(paths.get.test.watch, () => {
     return test();
   });

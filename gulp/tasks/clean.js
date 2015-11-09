@@ -15,8 +15,8 @@ paths.clean = [
   paths.to(paths.get.js.dest, '**')
 ];
 
-gulp.task('clean', function () {
-  return paths.clean.forEach(function (file) {
+gulp.task('clean', () => {
+  return paths.clean.forEach((file) => {
     var dir = path.dirname(file),
         files = [];
 

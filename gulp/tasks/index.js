@@ -22,7 +22,7 @@ files = glob.sync('*.js', options);
 /**
  * Filter the task files.
  */
-files = files.filter(function (file) {
+files = files.filter((file) => {
   /**
    * If the file is this file filter it out
    */
