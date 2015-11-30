@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jayzawrotny/gutil-waterlog.git"
+    "url": "git+https://github.com/jayzawrotny/liquidlog.git"
   },
   "keywords": [
     "gulp",
@@ -20,9 +20,9 @@
   "author": "Jay Zawrotny <jayzawrotny@gmail.com>",
   "license": "BSD-3-Clause",
   "bugs": {
-    "url": "https://github.com/jayzawrotny/gutil-waterlog/issues"
+    "url": "https://github.com/jayzawrotny/liquidlog/issues"
   },
-  "homepage": "https://github.com/jayzawrotny/gutil-waterlog#readme",
+  "homepage": "https://github.com/jayzawrotny/liquidlog#readme",
   "dependencies": {
     "gulp-util": "^3.0.7",
     "moment": "^2.10.6"
