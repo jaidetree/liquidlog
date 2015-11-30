@@ -1,16 +1,18 @@
-# [gutil](https://github.com/gulpjs/gulp-util)-waterlog [![Build Status: Linux][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
+# Liquidlog [![Build Status: Linux][travis-image]][travis-url] [![Dependency Status][depstat-image]][depstat-url]
 
 Gulp-util based log abstraction layer for super fluid, composable log messaging.
 
 ## Installation
 
 ```
-npm install --save-dev gutil-waterlog
+npm install --save-dev liquidlog
 ```
 
 ## Usage
 
 ```js
+var log = require('liquidlog');
+
 gulp.task('example', function () {
   log.time('task');
   log.task('example') // 'example is the plugin\group name'
@@ -161,13 +163,13 @@ Render your message as a string if you want to do other things to it. Note gutil
 
 BSD-3-Clause (c) 2015 Jay Zawrotny (jayzawrotny@gmail.com)
 
-[screenshot-image]: https://github.com/jayzawrotny/gutil-waterlog/raw/master/docs/images/screenshot_1.png
+[screenshot-image]: https://github.com/jayzawrotny/liquidlog/raw/master/docs/images/screenshot_1.png
 
-[npm-url]: https://npmjs.org/package/gutil-waterlog
-[npm-image]: http://img.shields.io/npm/v/gutil-waterlog.svg?style=flat
+[npm-url]: https://npmjs.org/package/liquidlog
+[npm-image]: http://img.shields.io/npm/v/liquidlog.svg?style=flat
 
-[travis-url]: https://travis-ci.org/jayzawrotny/gutil-waterlog
-[travis-image]: http://img.shields.io/travis/jayzawrotny/gutil-waterlog.svg?style=flat
+[travis-url]: https://travis-ci.org/jayzawrotny/liquidlog
+[travis-image]: http://img.shields.io/travis/jayzawrotny/liquidlog.svg?style=flat
 
-[depstat-url]: https://david-dm.org/jayzawrotny/gutil-waterlog
-[depstat-image]: http://img.shields.io/david/jayzawrotny/gutil-waterlog.svg?style=flat
+[depstat-url]: https://david-dm.org/jayzawrotny/liquidlog
+[depstat-image]: http://img.shields.io/david/jayzawrotny/liquidlog.svg?style=flat

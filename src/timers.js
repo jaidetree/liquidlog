@@ -63,9 +63,7 @@ class Timers {
         diff;
 
     /** We were given a name instead of a duration */
-    if (typeof data === 'string') {
-      data = this.get(data);
-    }
+    if (typeof data === 'string') data = this.get(data);
 
     /** Easy enough */
     diff = this.diff(data);
@@ -74,9 +72,7 @@ class Timers {
     duration = moment.duration(diff);
 
     /** If it took years to run you might want to consider some changes */
-    if (diff > YEARS) {
-      concat(duration.years(), 'y');
-    }
+    if (diff > YEARS) concat(duration.years(), 'y');
 
     /** It took months so lets add that string */
     if (diff > MONTHS) {
@@ -98,9 +94,7 @@ class Timers {
     }
 
     /** If the difference is more than minutes */
-    if (diff >= MINUTES) {
-      concat(duration.minutes(), 'min');
-    }
+    if (diff >= MINUTES) concat(duration.minutes(), 'min');
 
     /** IF the difference is more than a second */
     if (diff >= SECONDS && duration.get('seconds') > 0) {
@@ -174,12 +168,12 @@ class Timers {
   stop (name) {
     let duration;
 
-    if (!name) {
-      name = this.durations.length - 1;
-    }
+    if (!name) name = this.durations.length - 1;
 
     /** Get the current duration for this name */
     duration = this.get(name);
+
+    if (!duration) return null;
 
     /** Record the end time of this timer in ms */
     duration.end = Date.now();

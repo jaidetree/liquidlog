@@ -175,5 +175,20 @@ describe('Timers', () => {
         done();
       }, ms(20));
     });
+
+    it('should not break if the end time does not exist', (done) => {
+      let timers = new Timers(),
+          start = Date.now();
+
+      timers.start('test');
+
+      setTimeout(() => {
+        let output = timers.stop('blah'),
+            duration = timers.get('blah');
+
+        assert.equal(output, null);
+        done();
+      }, ms(20));
+    });
   });
 });

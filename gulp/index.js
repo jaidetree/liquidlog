@@ -1,6 +1,6 @@
-/* eslint no-console: 0 */
+import tasks from './tasks';
 import gulp from 'gulp';
-export * from './tasks';
+export default tasks;
 
 /**
  * Use module.exports here because the transpiler will not transpile
