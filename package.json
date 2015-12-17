@@ -1,6 +1,6 @@
 {
   "name": "liquidlog",
-  "version": "0.0.7",
+  "version": "0.1.0",
   "description": "A simple log abstraction library to make gulp logging faster & more colorful.",
   "main": "index.js",
   "scripts": {
