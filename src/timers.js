@@ -17,34 +17,6 @@ const SECONDS = 1000,
  * @property {object} index - Quick index to quickly refer to timers.
  */
 class Timers {
-  /**
-   * Constructor
-   * Initializes the timers class
-   *
-   * @constructor
-   */
-  constructor () {
-    this.durations = [];
-    this.index = {};
-  }
-
-  /**
-   * Diff
-   * Returns the difference between the start and end of a diff
-   *
-   * @method
-   * @public
-   * @param {object|string} data - Either duration object or timer name
-   * @returns {int} Difference between start and end time in ms
-   */
-  diff (data) {
-    /** We were given a name instead of a duration */
-    if (typeof data === 'string') {
-      data = this.get(data);
-    }
-
-    return data.end - data.start;
-  }
 
   /**
    * Elapsed
@@ -52,21 +24,14 @@ class Timers {
    *
    * @method
    * @public
-   * @param {object} data - Duration to return the elapsed time of
+   * @param {number} diff - Difference in MS to format
    * @returns {string} Elapsed time formatted as a string
    */
-  elapsed (data) {
+  static elapsed (diff) {
     let time = '',
         duration = '',
         concat = (...args) => time += ' ' + args.join(''),
-        skipDays = false,
-        diff;
-
-    /** We were given a name instead of a duration */
-    if (typeof data === 'string') data = this.get(data);
-
-    /** Easy enough */
-    diff = this.diff(data);
+        skipDays = false;
 
     /** Create a moment duration */
     duration = moment.duration(diff);
@@ -111,6 +76,35 @@ class Timers {
   }
 
   /**
+   * Constructor
+   * Initializes the timers class
+   *
+   * @constructor
+   */
+  constructor () {
+    this.durations = [];
+    this.index = {};
+  }
+
+  /**
+   * Diff
+   * Returns the difference between the start and end of a diff
+   *
+   * @method
+   * @public
+   * @param {object|string} data - Either duration object or timer name
+   * @returns {int} Difference between start and end time in ms
+   */
+  diff (data) {
+    /** We were given a name instead of a duration */
+    if (typeof data === 'string') {
+      data = this.get(data);
+    }
+
+    return data.end - data.start;
+  }
+
+  /**
    * Get
    * Retrieves the duration by name
    *
@@ -122,7 +116,8 @@ class Timers {
   get (name) {
     try {
       return this.durations[this.index[name]];
-    } catch (e) {
+    }
+    catch (e) {
       throw new Error(`Could not find timer by the name of ${name}`);
     }
   }
@@ -145,9 +140,9 @@ class Timers {
 
     /** Create our duration and update the index */
     this.durations.push({
-      name: name,
+      name,
       start: time,
-      end: null
+      end: null,
     });
 
     this.index[name] = this.durations.length - 1;
@@ -179,7 +174,7 @@ class Timers {
     duration.end = Date.now();
 
     /** Returned the elapsed time in a cute stringj */
-    return this.elapsed(duration);
+    return this.diff(duration);
   }
 }
 

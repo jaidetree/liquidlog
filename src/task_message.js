@@ -1,6 +1,5 @@
-'use strict';
-
 import Message from './message';
+import Timers from './timers';
 import { colors } from 'gulp-util';
 
 /**
@@ -146,12 +145,12 @@ class TaskMessage {
    *
    * @method
    * @public
-   * @param {string} str - The message string to format and add to the message
+   * @param {number} time - Time data to format as elapsed time
    * @returns {TaskMessage} Chainable instance reference
    */
-  time (str) {
+  time (time) {
     this.message.push('in');
-    this.message.push(colors.cyan(str));
+    this.message.push(colors.cyan(Timers.elapsed(time)));
     return this;
   }
 

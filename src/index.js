@@ -73,7 +73,8 @@ export class Logger {
      */
     if (Cls === TaskMessage) {
       message.text(args[1]);
-    } else {
+    }
+    else {
       message.action(args[1]);
     }
 

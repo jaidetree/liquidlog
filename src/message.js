@@ -76,6 +76,7 @@ class Message {
    */
   push (...args) {
     let str = args.join('');
+
     this.message.push(str);
     return this;
   }
@@ -128,6 +129,7 @@ class Message {
    */
   unshift (...args) {
     let str = args.join('');
+
     this.message.unshift(str);
     return this;
   }

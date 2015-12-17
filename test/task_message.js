@@ -113,17 +113,18 @@ describe('TaskMessage', () => {
   });
 
   describe('#time()', () => {
-    it('should append an data string', () => {
+    it('should format a time difference', () => {
       let message = new TaskMessage();
-      message.time('5m');
-      assert.equal(message.toString(), 'in \u001b[36m5m\u001b[39m');
+      message.time(1000 * 60 * 5);
+      assert.equal(message.toString(), 'in \u001b[36m5min\u001b[39m');
     });
 
     it('should be a chainable method', () => {
       let message = new TaskMessage();
-      message.time('3m').time('27s');
-      assert.equal(message.toString(), 'in \u001b[36m3m\u001b[39m in \u001b[36m27s\u001b[39m');
+      message.time(1000 * 60 * 3).time(1000 * 27);
+      assert.equal(message.toString(), 'in \u001b[36m3min\u001b[39m in \u001b[36m27s\u001b[39m');
     });
+
   });
 
   describe('#toString()', () => {

@@ -1,9 +1,8 @@
-/* global describe, it */
 import assert from 'assert';
 import Timers from '../src/timers';
 
-function duration(start=Date.now(), end=null, name='test') {
-  return { name: name, start: start, end: end };
+function duration(start=Date.now(), end=null) {
+  return end - start;
 }
 
 function ms(x=0) {
@@ -45,7 +44,7 @@ describe('Timers', () => {
 
     it('should have methods', () => {
       let methods = Object.getOwnPropertyNames(Timers.prototype);
-      assert.deepEqual(methods, ['constructor', 'diff', 'elapsed', 'get', 'start', 'stop']);
+      assert.deepEqual(methods, ['constructor', 'diff', 'get', 'start', 'stop']);
     });
   });
 
@@ -54,7 +53,7 @@ describe('Timers', () => {
       let timers = new Timers(),
           start = Date.now(),
           end = Date.now() + ms(500),
-          diff = timers.diff(duration(start, end));
+          diff = timers.diff({ start, end });
 
       assert.ok(!isNaN(diff));
       assert.ok(diff > 0);
@@ -67,7 +66,7 @@ describe('Timers', () => {
       let timers = new Timers(),
           start = Date.now(),
           end = start + 1005,
-          elapsed = timers.elapsed(duration(start, end));
+          elapsed = Timers.elapsed(duration(start, end));
 
       assert.equal(elapsed, `1s 5ms`);
     });
@@ -76,7 +75,7 @@ describe('Timers', () => {
       let timers = new Timers(),
           start = Date.now(),
           end = start + h() + min() + s() + ms(5),
-          elapsed = timers.elapsed(duration(start, end));
+          elapsed = Timers.elapsed(duration(start, end));
 
       assert.equal(elapsed, `1h 1min 1s 5ms`);
     });
@@ -85,7 +84,7 @@ describe('Timers', () => {
       let timers = new Timers(),
           start = Date.now(),
           end = start + h() + min(3),
-          elapsed = timers.elapsed(duration(start, end));
+          elapsed = Timers.elapsed(duration(start, end));
 
       assert.equal(elapsed, `1h 3min`);
     });
@@ -94,7 +93,7 @@ describe('Timers', () => {
       let timers = new Timers(),
           start = Date.now(),
           end = start + m(2) + min(3),
-          elapsed = timers.elapsed(duration(start, end));
+          elapsed = Timers.elapsed(duration(start, end));
 
       assert.equal(elapsed, `2m 3min`);
     });
@@ -103,7 +102,7 @@ describe('Timers', () => {
       let timers = new Timers(),
           start = Date.now(),
           end = start + y(2) + m(5) + min(3) + s(5),
-          elapsed = timers.elapsed(duration(start, end));
+          elapsed = Timers.elapsed(duration(start, end));
 
       assert.equal(elapsed, `2y 5m 3min 5s`);
     });
@@ -162,7 +161,7 @@ describe('Timers', () => {
       timers.start('test');
 
       setTimeout(() => {
-        let output = timers.stop('test'),
+        let output = Timers.elapsed(timers.stop('test')),
             duration = timers.get('test');
 
         assert.ok(output.startsWith('2'));
